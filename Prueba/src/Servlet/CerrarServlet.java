@@ -8,22 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DTO.Usuario;
-import DAO.UsuarioDAO;
-
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class CerrarServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/CerrarServlet")
+public class CerrarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Usuario u = new Usuario();
-	UsuarioDAO udao = new UsuarioDAO();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public CerrarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +27,9 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		session.removeAttribute("usuario");
+		response.sendRedirect("index.jsp");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -40,16 +37,10 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		u.setFamilia(request.getParameter("familia"));
-		u.setPass(request.getParameter("pass"));
-		if(udao.login(u.getFamilia(), u.getPass())) {
-			HttpSession session = request.getSession();
-			session.setAttribute("usuario", u);
-			
-			response.sendRedirect("menu.jsp");
-		}else {
-			response.sendRedirect("index.jsp? error al conectar");
-		}
+		//HttpSession session = request.getSession();
+		//session.removeAttribute("usuario");
+		//response.sendRedirect("index.jsp");
+		
 		doGet(request, response);
 	}
 
