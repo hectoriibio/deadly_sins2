@@ -8,5 +8,23 @@
 </head>
 <body>
 	<h1>Hola Mundo!</h1>
+	<div align="right">
+		<form action="LoginServlet" method="post">
+			<table>
+				<tr>
+					<td>Familia</td>
+					<td><input type="text" name="familia"></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" name="pass"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Login"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>

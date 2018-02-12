@@ -1,7 +1,6 @@
 package Servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,18 +10,18 @@ import DTO.Usuario;
 import DAO.UsuarioDAO;
 
 /**
- * Servlet implementation class UsuarioServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/UsuarioServlet")
-public class UsuarioServlet extends HttpServlet {
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Usuario u = new Usuario();
-    UsuarioDAO udao = new UsuarioDAO();
+	UsuarioDAO udao = new UsuarioDAO();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UsuarioServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,14 +38,14 @@ public class UsuarioServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		u.setFamilia(request.getParameter("familia"));
-		u.setPass(request.getParameter("pass"));
-		u.setCorreo(request.getParameter("correo"));
-		u.setTelefono(request.getParameter("telefono"));
-		udao.insert(u);
-		response.sendRedirect("ingreso_ok.jsp");
+		String f = request.getParameter("familia");
+		String p = request.getParameter("pass");
+		if(udao.login(f, p)) {
+			response.sendRedirect("menu.jsp");
+		}else {
+			response.sendRedirect("index.jsp? error al conectar");
+		}
 		doGet(request, response);
-		
 	}
 
 }
