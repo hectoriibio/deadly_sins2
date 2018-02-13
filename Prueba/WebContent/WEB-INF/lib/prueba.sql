@@ -11,8 +11,51 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- La exportación de datos fue deseleccionada.
--- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura de base de datos para prueba
+CREATE DATABASE IF NOT EXISTS `prueba` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
+USE `prueba`;
+
+-- Volcando estructura para tabla prueba.personaje
+CREATE TABLE IF NOT EXISTS `personaje` (
+  `familia` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `nivel` int(11) NOT NULL,
+  `ap` int(11) NOT NULL,
+  `awa` int(11) NOT NULL,
+  `dp` int(11) NOT NULL,
+  `punteria` int(11) NOT NULL,
+  `equipo` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`nombre`),
+  KEY `familia` (`familia`),
+  CONSTRAINT `personaje_ibfk_1` FOREIGN KEY (`familia`) REFERENCES `usuario` (`familia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- Volcando datos para la tabla prueba.personaje: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `personaje` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personaje` ENABLE KEYS */;
+
+-- Volcando estructura para tabla prueba.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `familia` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `pass` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estado` int(1) NOT NULL,
+  `fecha` date NOT NULL,
+  PRIMARY KEY (`familia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- Volcando datos para la tabla prueba.usuario: ~4 rows (aproximadamente)
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+REPLACE INTO `usuario` (`familia`, `pass`, `correo`, `telefono`, `estado`, `fecha`) VALUES
+	('a', 'a', 'a', 'a', 1, '2018-02-10'),
+	('b', 'b', 'b', 'b', 0, '2018-02-10'),
+	('c', 'c', 'c', 'c', 0, '2018-02-10'),
+	('d', 'd', 'd', 'd', 0, '2018-02-10'),
+	('Kzu', '123', 'alvaro.vegap@gmail.com', '+56978837265', 0, '2018-02-10');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
